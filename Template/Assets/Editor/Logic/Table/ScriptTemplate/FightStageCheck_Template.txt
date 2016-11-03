@@ -1,0 +1,46 @@
+﻿using UnityEngine;
+using System.Collections;
+
+using Tables;
+namespace GameLogic
+{
+    public class FightStageCheck_Template : FightStageCheck_Base
+    {
+        FightStageCheck_TemplateRecord _CheckRecord;
+
+        public override void Init(string checkID)
+        {
+            _CheckRecord = TableReader.FightStageCheck_Template.GetRecord(checkID);
+
+            base.Init(checkID);
+
+            TagetValue = _CheckRecord.TemplateCount;
+        }
+
+        public override string GetCheckDesc()
+        {
+            if (CurValue < TagetValue)
+            {
+                return "摧毁车辆 " + CurValue.ToString() + "/" + TagetValue.ToString();
+            }
+            else
+            {
+                return "摧毁车辆 " + TagetValue.ToString() + "/" + TagetValue.ToString();
+            }
+        }
+
+        #region 
+
+        protected override void InitEvent()
+        {
+            RegisteEvent(GameBase.EVENT_TYPE.EVENT_FIGHT_DESTORY, EventHandle);
+        }
+
+        public void EventHandle(object sender, Hashtable hash)
+        {
+            CurValue = (int)hash["value"];
+        }
+
+        #endregion
+    }
+}

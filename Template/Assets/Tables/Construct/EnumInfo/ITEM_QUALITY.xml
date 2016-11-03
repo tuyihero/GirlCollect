@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <enumColumn>
+    <enumName>空</enumName>
+    <enumCode>None</enumCode>
+    <enumValue>0</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>白</enumName>
+    <enumCode>WHITE</enumCode>
+    <enumValue>1</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>绿</enumName>
+    <enumCode>GREEN</enumCode>
+    <enumValue>2</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>蓝</enumName>
+    <enumCode>BLUE</enumCode>
+    <enumValue>3</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>紫</enumName>
+    <enumCode>PURPLE</enumCode>
+    <enumValue>4</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>橙</enumName>
+    <enumCode>ORINGE</enumCode>
+    <enumValue>5</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+</root>

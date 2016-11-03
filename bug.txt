@@ -1,0 +1,4 @@
+
+//finish ui;
+//get award tips
+error tips

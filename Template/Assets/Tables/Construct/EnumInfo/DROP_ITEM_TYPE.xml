@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <enumColumn>
+    <enumName>空</enumName>
+    <enumCode>None</enumCode>
+    <enumValue>0</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>物品</enumName>
+    <enumCode>ITEM</enumCode>
+    <enumValue>1</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>车辆</enumName>
+    <enumCode>CAR</enumCode>
+    <enumValue>2</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>车手</enumName>
+    <enumCode>DRIVER</enumCode>
+    <enumValue>3</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>钻石</enumName>
+    <enumCode>DIAMOND</enumCode>
+    <enumValue>4</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+  <enumColumn>
+    <enumName>金币</enumName>
+    <enumCode>GOLD</enumCode>
+    <enumValue>5</enumValue>
+    <enumDesc>
+    </enumDesc>
+  </enumColumn>
+</root>
