@@ -137,6 +137,12 @@ namespace GameLogic
             }
         }
 
+        public bool IsStagePassed(FightSceneRecord stageRecord)
+        {
+            var stageInfo = GetStageByID(stageRecord.Id);
+            return stageInfo.MaxPassPoint > 0;
+        }
+
         public FightStageInfo GetStageByID(string stageID)
         {
             var findStage = _FightStageList.Find((stage) =>

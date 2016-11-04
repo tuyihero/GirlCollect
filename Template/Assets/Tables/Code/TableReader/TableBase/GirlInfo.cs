@@ -16,6 +16,7 @@ namespace Tables
         public string Desc { get; set; }
         public string Icon { get; set; }
         public int Star { get; set; }
+        public FightSceneRecord CatchStagePass { get; set; }
         public string LevelInfoTypeID { get; set; }
         public int Attr1A { get; set; }
         public int Attr1B { get; set; }
@@ -42,6 +43,14 @@ namespace Tables
             recordStrList.Add(TableWriteBase.GetWriteStr(Desc));
             recordStrList.Add(TableWriteBase.GetWriteStr(Icon));
             recordStrList.Add(TableWriteBase.GetWriteStr(Star));
+            if (CatchStagePass != null)
+            {
+                recordStrList.Add(CatchStagePass.Id);
+            }
+            else
+            {
+                recordStrList.Add("");
+            }
             recordStrList.Add(TableWriteBase.GetWriteStr(LevelInfoTypeID));
             recordStrList.Add(TableWriteBase.GetWriteStr(Attr1A));
             recordStrList.Add(TableWriteBase.GetWriteStr(Attr1B));
@@ -127,21 +136,21 @@ namespace Tables
                 pair.Value.Desc = TableReadBase.ParseString(pair.Value.ValueStr[2]);
                 pair.Value.Icon = TableReadBase.ParseString(pair.Value.ValueStr[3]);
                 pair.Value.Star = TableReadBase.ParseInt(pair.Value.ValueStr[4]);
-                pair.Value.LevelInfoTypeID = TableReadBase.ParseString(pair.Value.ValueStr[5]);
-                pair.Value.Attr1A = TableReadBase.ParseInt(pair.Value.ValueStr[6]);
-                pair.Value.Attr1B = TableReadBase.ParseInt(pair.Value.ValueStr[7]);
-                pair.Value.Attr2A = TableReadBase.ParseInt(pair.Value.ValueStr[8]);
-                pair.Value.Attr2B = TableReadBase.ParseInt(pair.Value.ValueStr[9]);
-                pair.Value.Attr3A = TableReadBase.ParseInt(pair.Value.ValueStr[10]);
-                pair.Value.Attr3B = TableReadBase.ParseInt(pair.Value.ValueStr[11]);
-                if (!string.IsNullOrEmpty(pair.Value.ValueStr[12]))
+                if (!string.IsNullOrEmpty(pair.Value.ValueStr[5]))
                 {
-                    pair.Value.Skills.Add( TableReader.SkillInfo.GetRecord(pair.Value.ValueStr[12]));
+                    pair.Value.CatchStagePass =  TableReader.FightScene.GetRecord(pair.Value.ValueStr[5]);
                 }
                 else
                 {
-                    pair.Value.Skills.Add(null);
+                    pair.Value.CatchStagePass = null;
                 }
+                pair.Value.LevelInfoTypeID = TableReadBase.ParseString(pair.Value.ValueStr[6]);
+                pair.Value.Attr1A = TableReadBase.ParseInt(pair.Value.ValueStr[7]);
+                pair.Value.Attr1B = TableReadBase.ParseInt(pair.Value.ValueStr[8]);
+                pair.Value.Attr2A = TableReadBase.ParseInt(pair.Value.ValueStr[9]);
+                pair.Value.Attr2B = TableReadBase.ParseInt(pair.Value.ValueStr[10]);
+                pair.Value.Attr3A = TableReadBase.ParseInt(pair.Value.ValueStr[11]);
+                pair.Value.Attr3B = TableReadBase.ParseInt(pair.Value.ValueStr[12]);
                 if (!string.IsNullOrEmpty(pair.Value.ValueStr[13]))
                 {
                     pair.Value.Skills.Add( TableReader.SkillInfo.GetRecord(pair.Value.ValueStr[13]));
@@ -169,6 +178,14 @@ namespace Tables
                 if (!string.IsNullOrEmpty(pair.Value.ValueStr[16]))
                 {
                     pair.Value.Skills.Add( TableReader.SkillInfo.GetRecord(pair.Value.ValueStr[16]));
+                }
+                else
+                {
+                    pair.Value.Skills.Add(null);
+                }
+                if (!string.IsNullOrEmpty(pair.Value.ValueStr[17]))
+                {
+                    pair.Value.Skills.Add( TableReader.SkillInfo.GetRecord(pair.Value.ValueStr[17]));
                 }
                 else
                 {

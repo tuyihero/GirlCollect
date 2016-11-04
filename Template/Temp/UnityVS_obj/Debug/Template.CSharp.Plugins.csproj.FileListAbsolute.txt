@@ -1,0 +1,13 @@
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.dll
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.pdb
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+D:\unityProject\TestCollect\Template\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\unityProject\TestCollect\Template\Temp\UnityVS_obj\Debug\Template.CSharp.Plugins.csprojResolveAssemblyReference.cache
+D:\unityProject\TestCollect\Template\Temp\UnityVS_obj\Debug\Assembly-CSharp-firstpass.dll
+D:\unityProject\TestCollect\Template\Temp\UnityVS_obj\Debug\Assembly-CSharp-firstpass.pdb

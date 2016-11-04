@@ -51,10 +51,57 @@ namespace GameLogic
         {
             _AppearGirls.Clear();
 
-            var randoms = GameBase.GameRandom.GetIndependentRandoms(0, selectGirls.Count, CaptureSceneRecord.AppearGirlCount);
-            for (int i = 0; i < randoms.Count; ++i)
+            int level = GetMaxLevelOfGirls(selectGirls);
+            int randomMaxLevel;
+            if (level == 4)
             {
-                _AppearGirls.Add(new GirlMemberInfo(selectGirls[randoms[i]].Id));
+                float randomRate = Random.Range(1, 10000);
+                if (randomRate < 2000)
+                {
+                    randomMaxLevel = 4;
+                }
+                else
+                {
+                    randomMaxLevel = 3;
+                }
+            }
+            else if (level == 5)
+            {
+                float randomRate = Random.Range(1, 10000);
+                if (randomRate < 1000)
+                {
+                    randomMaxLevel = 5;
+                }
+                else if (randomRate < 3000)
+                {
+                    randomMaxLevel = 4;
+                }
+                else
+                {
+                    randomMaxLevel = 3;
+                }
+            }
+            else
+            {
+                randomMaxLevel = 3;
+            }
+
+            var girlMax = GetRandomGirl(selectGirls, randomMaxLevel);
+            _AppearGirls.Add(new GirlMemberInfo(girlMax.Id));
+            selectGirls.Remove(girlMax);
+
+            for (int i = 0; i < 2; ++i)
+            {
+                var girl = GetRandomGirl(selectGirls, 2);
+                _AppearGirls.Add(new GirlMemberInfo(girl.Id));
+                selectGirls.Remove(girl);
+            }
+
+            for (int i = 0; i < 3; ++i)
+            {
+                var girl = GetRandomGirl(selectGirls, 1);
+                _AppearGirls.Add(new GirlMemberInfo(girl.Id));
+                selectGirls.Remove(girl);
             }
         }
 
@@ -71,6 +118,33 @@ namespace GameLogic
             GameCore.PushEvent(EVENT_TYPE.EVENT_LOGIC_CAPTURE_GIRL, null);
             return true;
         }
+
+        public int GetMaxLevelOfGirls(List<GirlInfoRecord> selectGirls)
+        {
+            return selectGirls[0].Star;
+        }
+
+        public GirlInfoRecord GetRandomGirl(List<GirlInfoRecord> selectGirls, int level)
+        {
+            int idxStart = selectGirls.FindIndex((girl) =>
+            {
+                if (girl.Star == level)
+                    return true;
+                return false;
+            });
+
+            int idxEnd = selectGirls.FindLastIndex((girl) =>
+            {
+                if (girl.Star == level)
+                    return true;
+                return false;
+            });
+
+            int idx = Random.Range(idxStart, idxEnd);
+            return selectGirls[idx];
+
+        }
+        
         #endregion
 
     }

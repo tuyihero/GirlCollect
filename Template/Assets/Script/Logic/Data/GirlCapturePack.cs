@@ -45,16 +45,10 @@ namespace GameLogic
             SetRefreshTimer();
 
             _CaptureList.Clear();
-            int randomModel = UnityEngine.Random.Range(0, 2);
-            var girlList = GirlMemberPack.Instance.GetGirlsNotInPack();
-            if (randomModel > 0)
-            {
-                AddCaptureSceneByID(girlList, "1", "2", "5");
-            }
-            else
-            {
-                AddCaptureSceneByID(girlList, "3", "4", "6");
-            }
+            var girlList = GetGirlCanCapture();
+
+            AddCaptureSceneByID(girlList, "1", "2", "5");
+
         }
 
         public void AddCaptureSceneByID(List<GirlInfoRecord> girlList, params string[] ids)
@@ -103,6 +97,25 @@ namespace GameLogic
             GirlMemberPack.Instance.AddNewGirls(captedGirls);
         }
 
+        public List<GirlInfoRecord> GetGirlCanCapture()
+        {
+            List<GirlInfoRecord> captureGirls = new List<GirlInfoRecord>();
+
+            foreach (var girl in GirlMemberPack.Instance.GetGirlsNotInPack())
+            {
+                if (girl.CatchStagePass == null)
+                {
+                    captureGirls.Add(girl);
+                }
+                else
+                {
+                    if (FightStagePack.Instance.IsStagePassed(girl.CatchStagePass))
+                        captureGirls.Add(girl);
+                }
+            }
+
+            return captureGirls;
+        }
         #endregion
 
 

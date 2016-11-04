@@ -60,6 +60,17 @@
     <constructRepeat>1</constructRepeat>
   </constructColumn>
   <constructColumn>
+    <constructName>CatchStagePass</constructName>
+    <constructCode>CatchStagePass</constructCode>
+    <constructType1>表格索引</constructType1>
+    <constructType2>
+      <constructType2>FightScene</constructType2>
+    </constructType2>
+    <constructDefault>
+    </constructDefault>
+    <constructRepeat>1</constructRepeat>
+  </constructColumn>
+  <constructColumn>
     <constructName>LevelInfoTypeID</constructName>
     <constructCode>LevelInfoTypeID</constructCode>
     <constructType1>基本类型</constructType1>

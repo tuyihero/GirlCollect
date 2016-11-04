@@ -21,6 +21,8 @@ namespace GameUI
         public Text[] _AttrValue;
         public GameObject[] Skills;
         public Text[] _SkillNames;
+        public Text _Desc;
+        public Image _Star;
 
         public Image _LimitImg;
         
@@ -114,6 +116,8 @@ namespace GameUI
                     _LimitImg.color = new Color(0, 0, 1);
                 }
             }
+
+            _Desc.text = _GirlMenberInfo.GirlInfoRecord.Desc;
         }
 
         public void ClearGirlInfo()
