@@ -180,7 +180,7 @@ namespace GameLogic
         public void RegisterFirstLogin(object sender, Hashtable hash)
         {
             GirlList.Clear();
-            for (int i = 104; i < 115; ++i)
+            for (int i = 104; i < 125; ++i)
             {
                 GirlList.Add(new GirlMemberInfo(i.ToString()));
             }

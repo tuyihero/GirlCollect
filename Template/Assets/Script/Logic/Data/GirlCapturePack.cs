@@ -83,19 +83,6 @@ namespace GameLogic
 
         #region capture
 
-        public void CalculateCapture(Dictionary<GirlCapturersRecord, GirlInfoRecord> captureDict)
-        {
-            List<GirlInfoRecord> captedGirls = new List<GirlInfoRecord>();
-            foreach (var capture in captureDict)
-            {
-                if (!captedGirls.Contains(capture.Value))
-                {
-                    captedGirls.Add(capture.Value);
-                }
-            }
-
-            GirlMemberPack.Instance.AddNewGirls(captedGirls);
-        }
 
         public List<GirlInfoRecord> GetGirlCanCapture()
         {

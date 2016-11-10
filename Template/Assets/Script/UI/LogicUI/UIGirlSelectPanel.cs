@@ -21,6 +21,17 @@ namespace GameUI
             GameCore.Instance.UIManager.ShowUI("LogicUI/UIGirlSelectPanel", hash);
         }
 
+        public static void ShowFilter(SelectGirlDelegate selectDelegate, List<int> filter)
+        {
+            Hashtable hash = new Hashtable();
+            hash.Add("SelectGirlDelegate", selectDelegate);
+            hash.Add("Filter", filter);
+            hash.Add("isCloseAfterSelect", true);
+            hash.Add("SelectedList", null);
+            hash.Add("DisselectDelegate", null);
+            GameCore.Instance.UIManager.ShowUI("LogicUI/UIGirlSelectPanel", hash);
+        }
+
         public static void HideAsyn()
         {
             GameCore.Instance.UIManager.HideUI("LogicUI/UIGirlSelectPanel");
@@ -49,8 +60,14 @@ namespace GameUI
             _CloseAfterSelect = (bool)hash["isCloseAfterSelect"];
             var selectedList = (List<GirlMemberInfo>)hash["SelectedList"];
             _DisSelectGirlCallBack = (SelectGirlDelegate)hash["DisselectDelegate"];
+            
 
             var group = GirlMemberPack.Instance.GirlList;
+            if (hash.ContainsKey("Filter"))
+            {
+                List<int> filter = (List<int>)hash["Filter"];
+                GirlMemberPack.SortByFilter(ref group, filter);
+            }
             _ContainerGroup.InitSelectContent(group, selectedList, SelectGroupGirl, UnSelectGroupGirl);
 
             _Animator.Play("MoveIn", 0);

@@ -21,14 +21,15 @@ namespace GameLogic
             return null;
         }
 
-        public override FightGirlInfo GetEnemyGirl()
+        public override List<GirlMemberInfo> GetEnemyGirl()
         {
             var girls = GirlMemberPack.Instance.GetRandomGirlInStar(_ObjRecord.GirlStar, 1);
 
-            FightGirlInfo fightGirl = new FightGirlInfo(new GirlMemberInfo(girls[0].Id));
-            fightGirl._HasMask = true;
+            GirlMemberInfo fightGirl = new GirlMemberInfo(girls[0].Id);
 
-            return fightGirl;
+            List<GirlMemberInfo> fightgirls = new List<GirlMemberInfo>();
+            fightgirls.Add(fightGirl);
+            return fightgirls;
         }
 
         private GuestInfoRecord GetRandomGuest(GirlInfoRecord girlInfo)

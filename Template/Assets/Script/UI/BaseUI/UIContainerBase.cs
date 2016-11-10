@@ -156,8 +156,8 @@ namespace GameUI
             {
                 if (_ContainerObj.localPosition.x + pos.Pos.x >= -_LayoutGroup.cellSize.x
                     && _ContainerObj.localPosition.x + pos.Pos.x <= _ViewPortWidth + _LayoutGroup.cellSize.x
-                    && _ContainerObj.localPosition.y - pos.Pos.y >= -_LayoutGroup.cellSize.y
-                    && _ContainerObj.localPosition.y - pos.Pos.y <= _ViewPortHeight + _LayoutGroup.cellSize.y)
+                    && -_ContainerObj.localPosition.y - pos.Pos.y >= -_LayoutGroup.cellSize.y
+                    && -_ContainerObj.localPosition.y - pos.Pos.y <= _ViewPortHeight + _LayoutGroup.cellSize.y)
                 {
                     _ItemPrefabList[showIdx].transform.localPosition = new Vector3(pos.Pos.x, pos.Pos.y, 0);
                     if (_ItemPrefabList[showIdx]._InitInfo != pos.Obj)

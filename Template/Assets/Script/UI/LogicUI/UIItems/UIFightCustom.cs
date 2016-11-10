@@ -76,7 +76,7 @@ namespace GameUI
                 attr.AttrName = GirlMemberInfo.ATTR_NAMES[0];
                 attrList.Add(attr);
             }
-            else
+            else if (_ShowGuest.Attr1AAttract < _ShowGuest.Attr1BAttract)
             {
                 AttrShow attr = new AttrShow();
                 attr.AttrValue = (int)_ShowGuest.Attr1BAttract;
@@ -91,7 +91,7 @@ namespace GameUI
                 attr.AttrName = GirlMemberInfo.ATTR_NAMES[2];
                 attrList.Add(attr);
             }
-            else
+            else if (_ShowGuest.Attr2AAttract < _ShowGuest.Attr2BAttract)
             {
                 AttrShow attr = new AttrShow();
                 attr.AttrValue = (int)_ShowGuest.Attr2BAttract;
@@ -106,7 +106,7 @@ namespace GameUI
                 attr.AttrName = GirlMemberInfo.ATTR_NAMES[4];
                 attrList.Add(attr);
             }
-            else
+            else if (_ShowGuest.Attr3AAttract < _ShowGuest.Attr3BAttract)
             {
                 AttrShow attr = new AttrShow();
                 attr.AttrValue = (int)_ShowGuest.Attr3BAttract;
@@ -142,7 +142,7 @@ namespace GameUI
                 attr.AttrName = GirlMemberInfo.ATTR_NAMES[0];
                 attrList.Add(attr);
             }
-            else
+            else if (_ShowGuest.Attr1APoint < _ShowGuest.Attr1BPoint)
             {
                 AttrShow attr = new AttrShow();
                 attr.AttrValue = (int)_ShowGuest.Attr1BPoint;
@@ -157,7 +157,7 @@ namespace GameUI
                 attr.AttrName = GirlMemberInfo.ATTR_NAMES[2];
                 attrList.Add(attr);
             }
-            else
+            else if (_ShowGuest.Attr2APoint < _ShowGuest.Attr2BPoint)
             {
                 AttrShow attr = new AttrShow();
                 attr.AttrValue = (int)_ShowGuest.Attr2BPoint;
@@ -172,7 +172,7 @@ namespace GameUI
                 attr.AttrName = GirlMemberInfo.ATTR_NAMES[4];
                 attrList.Add(attr);
             }
-            else
+            else if (_ShowGuest.Attr3APoint < _ShowGuest.Attr3BPoint)
             {
                 AttrShow attr = new AttrShow();
                 attr.AttrValue = (int)_ShowGuest.Attr3BPoint;

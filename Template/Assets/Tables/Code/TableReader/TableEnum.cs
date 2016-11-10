@@ -32,6 +32,20 @@ namespace Tables
     }
 
     //
+    public enum IMPACT_MODIFY_TARGET
+    {
+        None = 0, //,枚举必须保留0值
+        ATTR1A = 1, //ATTR1A,ATTR1A
+        ATTR1B = 2, //ATTR1B,ATTR1B
+        ATTR2A = 3, //ATTR2A,ATTR2A
+        ATTR2B = 4, //ATTR2B,ATTR2B
+        ATTR3A = 5, //ATTR3A,ATTR3A
+        ATTR3B = 6, //ATTR3B,ATTR3B
+        ATTRACK = 7, //ATTRACK,ATTRACK
+        POINT = 8, //POINT,POINT
+    }
+
+    //
     public enum IMPACT_MODIFY_TYPE
     {
         None = 0, //,枚举必须保留0值
@@ -78,6 +92,31 @@ namespace Tables
         ATTR2B = 5, //,
         ATTR3A = 6, //,
         ATTR3B = 7, //,
+    }
+
+    //
+    public enum SKILL_ACT_TERM
+    {
+        None = 0, //,枚举必须保留0值
+        NEED_LARGE1 = 1, //NEED_LARGE1,
+        NEED_LARGE2 = 2, //NEED_LARGE2,
+        NEED_SMALL1 = 3, //NEED_SMALL1,
+        NEED_SMALL2 = 4, //NEED_SMALL2,
+        NEED_SAME1 = 5, //NEED_SAME1,
+        NEED_SAME2 = 6, //NEED_SAME2,
+        NEED_SERIES = 7, //NEED_SERIES,
+    }
+
+    //
+    public enum SKILL_ACT_TIMING
+    {
+        None = 0, //,枚举必须保留0值
+        ROUNT_START = 1, //ROUNT_START,
+        ROUNT_ATTRACT = 2, //ROUNT_ATTRACT,
+        ROUNT_POINT = 3, //ROUNT_POINT,
+        ROUNT_FINISH = 4, //ROUNT_FINISH,
+        FIGHT_START = 5, //FIGHT_START,
+        FIGHT_FINISH = 6, //FIGHT_FINISH,
     }
 
     //

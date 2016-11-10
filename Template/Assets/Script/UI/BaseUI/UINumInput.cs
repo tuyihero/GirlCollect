@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System.Collections;
 
 using GameBase;
@@ -19,7 +20,9 @@ namespace GameUI
         {
             get
             {
-                _Value = int.Parse(_InputField.text);
+
+                if (!int.TryParse(_InputField.text, out _Value))
+                    _Value = 0;
                 return _Value;
             }
             set
@@ -58,6 +61,7 @@ namespace GameUI
                 Value = Mathf.Min(resValue, _MinValue);
             }
 
+            ValueChange();
         }
 
         public void BtnDec(int stepValue)
@@ -71,7 +75,37 @@ namespace GameUI
             {
                 Value = Mathf.Min(resValue, _MinValue);
             }
+
+            ValueChange();
         }
+
+        public void InputChange()
+        {
+            if (!int.TryParse(_InputField.text, out _Value))
+                _Value = 0;
+            ValueChange();
+        }
+        #endregion
+
+        #region value change
+
+        [System.Serializable]
+        public class OnChangeEvent : UnityEvent<int>
+        {
+            public OnChangeEvent() { }
+        }
+
+        [SerializeField]
+        public OnChangeEvent OnValueChange;
+
+        public void ValueChange()
+        {
+            if (OnValueChange != null)
+            {
+                OnValueChange.Invoke(_Value);
+            }
+        }
+
 
         #endregion
     }

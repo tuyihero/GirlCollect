@@ -4,7 +4,7 @@
   </tableClass>
   <tableDesc>
   </tableDesc>
-  <tableOldName>GirlSkillInfo</tableOldName>
+  
   <constructColumn>
     <constructName>ID</constructName>
     <constructCode>Id</constructCode>
@@ -35,6 +35,26 @@
     </constructType2>
     <constructDefault>
     </constructDefault>
+    <constructRepeat>1</constructRepeat>
+  </constructColumn>
+  <constructColumn>
+    <constructName>ActTiming</constructName>
+    <constructCode>ActTiming</constructCode>
+    <constructType1>自定义枚举</constructType1>
+    <constructType2>
+      <constructType2>SKILL_ACT_TIMING</constructType2>
+    </constructType2>
+    <constructDefault>0</constructDefault>
+    <constructRepeat>1</constructRepeat>
+  </constructColumn>
+  <constructColumn>
+    <constructName>ActTerm</constructName>
+    <constructCode>ActTerm</constructCode>
+    <constructType1>自定义枚举</constructType1>
+    <constructType2>
+      <constructType2>SKILL_ACT_TERM</constructType2>
+    </constructType2>
+    <constructDefault>0</constructDefault>
     <constructRepeat>1</constructRepeat>
   </constructColumn>
   <constructColumn>

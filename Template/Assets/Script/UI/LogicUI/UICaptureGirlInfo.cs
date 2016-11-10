@@ -26,8 +26,8 @@ namespace GameUI
         #region params
 
         public UIGirlMemberItem _GirlMemberItem;
-
         public UINumInput[] _Currencys;
+        public Text _CaptureRate;
 
         private GirlMemberInfo _GirlInfo;
         private GirlCaptureScene _CaptureScene;
@@ -56,9 +56,9 @@ namespace GameUI
 
             if(_Currencys.Length == 3)
             {
-                _Currencys[0].Init(0, 0, PlayerData.Instance.GetCurrency(Tables.CURRENCY_TYPE.GOLD));
+                _Currencys[0].Init(0, 0, PlayerData.Instance.GetCurrency(Tables.CURRENCY_TYPE.DIAMOND));
                 _Currencys[1].Init(0, 0, PlayerData.Instance.GetCurrency(Tables.CURRENCY_TYPE.LUXURY));
-                _Currencys[2].Init(0, 0, PlayerData.Instance.GetCurrency(Tables.CURRENCY_TYPE.DIAMOND));
+                _Currencys[2].Init(0, 0, PlayerData.Instance.GetCurrency(Tables.CURRENCY_TYPE.GOLD));
             }
         }
 
@@ -86,9 +86,15 @@ namespace GameUI
         {
             if (_CaptureScene != null)
             {
-                if (_CaptureScene.TryCaptureGirl(_GirlInfo, _Currencys[0].Value, _Currencys[1].Value, _Currencys[2].Value))
+                if (_CaptureScene.TryCaptureGirl(_GirlInfo, _Currencys[2].Value, _Currencys[1].Value, _Currencys[0].Value))
                     Hide();
             }
+        }
+
+        public void CurrencyChange(int value)
+        {
+            int rate = _CaptureScene.CulCaptureGirlRate(_GirlInfo, _Currencys[2].Value, _Currencys[1].Value, _Currencys[0].Value);
+            _CaptureRate.text = ((int)(rate * 0.01f)).ToString() + "%";
         }
 
         #endregion

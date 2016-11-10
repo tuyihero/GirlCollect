@@ -36,7 +36,7 @@ namespace GameLogic
         private List<FightObjPlan_Base> _FightGuestPlans = new List<FightObjPlan_Base>();
 
         private List<GuestInfoRecord> _WaveGuests = new List<GuestInfoRecord>();
-        private List<FightGirlInfo> _EnemyGirls = new List<FightGirlInfo>();
+        private List<List<GirlMemberInfo>> _EnemyGirls = new List<List<GirlMemberInfo>>();
 
         private int _FightingWave = 0;
         public int FightWave { get { return _FightingWave; } }
@@ -44,7 +44,7 @@ namespace GameLogic
         public FightObj_Player SelfPlayer;
         public FightObj_Player EnemyPlayer;
 
-        public FightGirlInfo GetWaveEnemy()
+        public List<GirlMemberInfo> GetWaveEnemy()
         {
             if (_EnemyGirls.Count > _FightingWave)
                 return _EnemyGirls[_FightingWave];
@@ -58,6 +58,28 @@ namespace GameLogic
                 return _WaveGuests[_FightingWave];
 
             return null;
+        }
+
+        public List<int> GetGuestFilter()
+        {
+            List<int> guestFilter = new List<int>();
+
+            if (GetWaveGuest().Attr1APoint > 0)
+                guestFilter.Add(0);
+            else if (GetWaveGuest().Attr1BPoint > 0)
+                guestFilter.Add(1);
+
+            if (GetWaveGuest().Attr2APoint > 0)
+                guestFilter.Add(2);
+            else if (GetWaveGuest().Attr2BPoint > 0)
+                guestFilter.Add(3);
+
+            if (GetWaveGuest().Attr3APoint > 0)
+                guestFilter.Add(4);
+            else if (GetWaveGuest().Attr3BPoint > 0)
+                guestFilter.Add(5);
+
+            return guestFilter;
         }
  
         #endregion
@@ -130,10 +152,13 @@ namespace GameLogic
             _FightGirls.Clear();
         }
 
-        public void SetFightGirlCD(GirlMemberInfo girlInfo)
+        public void SetFightGirlCD()
         {
-            girlInfo._FightCD = FIGHT_GIRL_CD;
-            _FightGirls.Add(girlInfo);
+            foreach (var girlInfo in SelfPlayer.FightingGirls)
+            {
+                girlInfo._FightCD = FIGHT_GIRL_CD;
+                _FightGirls.Add(girlInfo);
+            }
         }
 
         public void DecFightGirlCD()
@@ -227,7 +252,7 @@ namespace GameLogic
                 return false;
             }
 
-            EnemyPlayer.SetFightingGirl(GetWaveEnemy());
+            EnemyPlayer.SetFightGirl(GetWaveEnemy());
             SelfPlayer.SetMemberGirl(null);
 
             RoundInit();
@@ -238,25 +263,12 @@ namespace GameLogic
 
         public void FightFinish()
         {
-            
             DecGirlLimit();
             _FightStage.FinishFighting(SelfPlayer.EvaluationValue, EnemyPlayer.EvaluationValue);
         }
 
-        public FightGirlInfo SelectedGirl(GirlMemberInfo girlInfo)
-        {
-            SelfPlayer.SetMemberGirl(girlInfo);
-            return SelfPlayer.FightingGirl;
-        }
-
         public RoundResult RoundCalculate()
         {
-
-            if (SelfPlayer.FightingGirl == null)
-            {
-                ErrorManager.PushAndDisplayError("FightingGirl empty");
-                return null;
-            }
 
             RoundResult roundResult = new RoundResult();
             roundResult.GuestInfo = GetWaveGuest();
@@ -273,7 +285,7 @@ namespace GameLogic
 
             RoundEnd(ref roundResult);
 
-            SetFightGirlCD(SelfPlayer.FightingGirl._GirlInfo);
+            SetFightGirlCD();
             return roundResult;
         }
 

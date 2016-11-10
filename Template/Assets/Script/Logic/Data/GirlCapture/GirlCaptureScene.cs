@@ -113,10 +113,27 @@ namespace GameLogic
                 return false;
             }
 
-            GirlMemberPack.Instance.AddNewGirl(girlInfo);
+            int captureRate = CulCaptureGirlRate(girlInfo, gold, luxury, diamond);
+            int randomRate = Random.Range(0, 10001);
 
-            GameCore.PushEvent(EVENT_TYPE.EVENT_LOGIC_CAPTURE_GIRL, null);
-            return true;
+            Hashtable hash = new Hashtable();
+            if (randomRate < captureRate)
+            {
+                GirlMemberPack.Instance.AddNewGirl(girlInfo);
+
+                hash.Add("Sucess", true);
+                GameCore.PushEvent(EVENT_TYPE.EVENT_LOGIC_CAPTURE_GIRL, hash);
+
+                return true;
+            }
+            else
+            {
+                hash.Add("Sucess", false);
+                GameCore.PushEvent(EVENT_TYPE.EVENT_LOGIC_CAPTURE_GIRL, hash);
+
+                return false;
+            }
+
         }
 
         public int GetMaxLevelOfGirls(List<GirlInfoRecord> selectGirls)
@@ -124,7 +141,7 @@ namespace GameLogic
             return selectGirls[0].Star;
         }
 
-        public GirlInfoRecord GetRandomGirl(List<GirlInfoRecord> selectGirls, int level)
+        private GirlInfoRecord GetRandomGirl(List<GirlInfoRecord> selectGirls, int level)
         {
             int idxStart = selectGirls.FindIndex((girl) =>
             {
@@ -142,6 +159,70 @@ namespace GameLogic
 
             int idx = Random.Range(idxStart, idxEnd);
             return selectGirls[idx];
+
+        }
+
+        public int CulCaptureGirlRate(GirlMemberInfo girlInfo, int gold, int luxury, int diamond)
+        {
+            int captureRate = 0;
+
+            if (girlInfo.GirlInfoRecord.Star == 1)
+            {
+                captureRate += luxury * 50;
+                captureRate += gold * 10;
+                if (captureRate > 9999)
+                {
+                    captureRate = 9999;
+                }
+
+                captureRate += diamond * 1000;
+            }
+            else if (girlInfo.GirlInfoRecord.Star == 2)
+            {
+                captureRate += luxury * 50;
+                captureRate += gold * 10;
+                if (captureRate > 8888)
+                {
+                    captureRate = 8888;
+                }
+
+                captureRate += diamond * 500;
+            }
+            else if (girlInfo.GirlInfoRecord.Star ==3)
+            {
+                captureRate += luxury * 50;
+                captureRate += gold * 10;
+                if (captureRate > 5555)
+                {
+                    captureRate = 5555;
+                }
+
+                captureRate += diamond * 200;
+            }
+            else if (girlInfo.GirlInfoRecord.Star == 4)
+            {
+                captureRate += luxury * 50;
+                captureRate += gold * 10;
+                if (captureRate > 3333)
+                {
+                    captureRate = 3333;
+                }
+
+                captureRate += diamond * 150;
+            }
+            else if (girlInfo.GirlInfoRecord.Star == 5)
+            {
+                captureRate += luxury * 50;
+                captureRate += gold * 10;
+                if (captureRate > 1111)
+                {
+                    captureRate = 1111;
+                }
+
+                captureRate += diamond * 100;
+            }
+
+            return captureRate;
 
         }
         

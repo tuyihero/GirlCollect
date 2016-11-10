@@ -87,13 +87,9 @@ namespace Tables
 //
         public static MissionCheck_WebcamFight MissionCheck_WebcamFight { get; internal set; }
 //
-        public static BuffImpact_ModifyAttract BuffImpact_ModifyAttract { get; internal set; }
+        public static Impact_AttrChange Impact_AttrChange { get; internal set; }
 //
-        public static BuffImpact_ModifyPoint BuffImpact_ModifyPoint { get; internal set; }
-//
-        public static BuffImpact_ModifyValueInstant BuffImpact_ModifyValueInstant { get; internal set; }
-//
-        public static BuffImpact_ModifyValueLast BuffImpact_ModifyValueLast { get; internal set; }
+        public static Impact_ModifyCul Impact_ModifyCul { get; internal set; }
 //
         public static FightObjPlan_Fixed FightObjPlan_Fixed { get; internal set; }
 //
@@ -133,10 +129,8 @@ namespace Tables
             MissionCheck_PassStage = new MissionCheck_PassStage(TableReadBase.GetTableText("BaseFunc/MissionChecks/MissionCheck_PassStage"), false);
             MissionCheck_SpecilFight = new MissionCheck_SpecilFight(TableReadBase.GetTableText("BaseFunc/MissionChecks/MissionCheck_SpecilFight"), false);
             MissionCheck_WebcamFight = new MissionCheck_WebcamFight(TableReadBase.GetTableText("BaseFunc/MissionChecks/MissionCheck_WebcamFight"), false);
-            BuffImpact_ModifyAttract = new BuffImpact_ModifyAttract(TableReadBase.GetTableText("BuffImpact/BuffImpact_ModifyAttract"), false);
-            BuffImpact_ModifyPoint = new BuffImpact_ModifyPoint(TableReadBase.GetTableText("BuffImpact/BuffImpact_ModifyPoint"), false);
-            BuffImpact_ModifyValueInstant = new BuffImpact_ModifyValueInstant(TableReadBase.GetTableText("BuffImpact/BuffImpact_ModifyValueInstant"), false);
-            BuffImpact_ModifyValueLast = new BuffImpact_ModifyValueLast(TableReadBase.GetTableText("BuffImpact/BuffImpact_ModifyValueLast"), false);
+            Impact_AttrChange = new Impact_AttrChange(TableReadBase.GetTableText("BuffImpact/Impact_AttrChange"), false);
+            Impact_ModifyCul = new Impact_ModifyCul(TableReadBase.GetTableText("BuffImpact/Impact_ModifyCul"), false);
             FightObjPlan_Fixed = new FightObjPlan_Fixed(TableReadBase.GetTableText("FightObjPlan/FightObjPlan_Fixed"), false);
             FightObjPlan_Random = new FightObjPlan_Random(TableReadBase.GetTableText("FightObjPlan/FightObjPlan_Random"), false);
 
@@ -172,10 +166,8 @@ namespace Tables
             MissionCheck_PassStage.CoverTableContent();
             MissionCheck_SpecilFight.CoverTableContent();
             MissionCheck_WebcamFight.CoverTableContent();
-            BuffImpact_ModifyAttract.CoverTableContent();
-            BuffImpact_ModifyPoint.CoverTableContent();
-            BuffImpact_ModifyValueInstant.CoverTableContent();
-            BuffImpact_ModifyValueLast.CoverTableContent();
+            Impact_AttrChange.CoverTableContent();
+            Impact_ModifyCul.CoverTableContent();
             FightObjPlan_Fixed.CoverTableContent();
             FightObjPlan_Random.CoverTableContent();
         }

@@ -23,6 +23,7 @@ namespace GameUI
         public Text[] _SkillNames;
         public Text _Desc;
         public Image _Star;
+        public Text Star;
 
         public Image _LimitImg;
         
@@ -64,7 +65,10 @@ namespace GameUI
         private void SetGirlInfo()
         {
             if (_GirlMenberInfo == null)
+            {
+                ClearGirlInfo();
                 return;
+            }
 
             if (_GirlMemberIcon != null)
             {
@@ -79,6 +83,23 @@ namespace GameUI
             if (_GirlMemberDesc != null)
             {
                 _GirlMemberDesc.text = _GirlMenberInfo.GirlInfoRecord.Desc;
+            }
+
+            Star.text = _GirlMenberInfo.GirlInfoRecord.Star.ToString();
+
+            for (int i = 0; i < _SkillNames.Length; ++i)
+            {
+                if (_GirlMenberInfo.GirlInfoRecord.Skills.Count <= i
+                    || _GirlMenberInfo.GirlInfoRecord.Skills[i] == null)
+                {
+                    Skills[i].SetActive(false);
+                }
+                else
+                {
+                    Skills[i].SetActive(true);
+                    _SkillNames[i].text = _GirlMenberInfo.GirlInfoRecord.Skills[i].Name;
+                }
+
             }
 
             var attrDic = _GirlMenberInfo.GetAdvantageAttrs();
@@ -104,17 +125,17 @@ namespace GameUI
                     _LimitImg.gameObject.SetActive(true);
                     _LimitImg.color = new Color(1, 0, 0);
                 }
-                if (_GirlMenberInfo.GetVitalityRate() < 0.5f)
-                {
-                    _LimitImg.gameObject.SetActive(true);
-                    _LimitImg.color = new Color(0, 1, 0);
-                }
-                if (FightStagePack.Instance.IsGirlInSpecilFight(_GirlMenberInfo)
-                    || FightStagePack.Instance.IsGirlInWebcamFight(_GirlMenberInfo))
-                {
-                    _LimitImg.gameObject.SetActive(true);
-                    _LimitImg.color = new Color(0, 0, 1);
-                }
+                //if (_GirlMenberInfo.GetVitalityRate() < 0.5f)
+                //{
+                //    _LimitImg.gameObject.SetActive(true);
+                //    _LimitImg.color = new Color(0, 1, 0);
+                //}
+                //if (FightStagePack.Instance.IsGirlInSpecilFight(_GirlMenberInfo)
+                //    || FightStagePack.Instance.IsGirlInWebcamFight(_GirlMenberInfo))
+                //{
+                //    _LimitImg.gameObject.SetActive(true);
+                //    _LimitImg.color = new Color(0, 0, 1);
+                //}
             }
 
             _Desc.text = _GirlMenberInfo.GirlInfoRecord.Desc;
@@ -145,11 +166,25 @@ namespace GameUI
                 _AttrText[idx].text = "";
                 _AttrValue[idx].text = "";
             }
+
+            for (int i = 0; i < _SkillNames.Length; ++i)
+            {
+                Skills[i].SetActive(false);
+            }
+            Star.text = "";
         }
 
         public void ShowIsLock()
         {
             
+        }
+
+        public void SetSkillCanUse(int idx, bool isCan)
+        {
+            if (isCan)
+                _SkillNames[idx].color = new Color(0, 1, 0);
+            else
+                _SkillNames[idx].color = new Color(0, 0, 0);
         }
 
         #region select

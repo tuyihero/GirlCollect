@@ -21,6 +21,7 @@ namespace GameBase
             if (_ErrorInfo != null && !string.IsNullOrEmpty(_ErrorInfo.ErrorMsg))
             {
                 LogManager.LogError("Error:" + _ErrorInfo.ErrorMsg);
+                GameUI.UIErrorTips.ShowAsyn(_ErrorInfo.ErrorMsg);
             }
         }
 

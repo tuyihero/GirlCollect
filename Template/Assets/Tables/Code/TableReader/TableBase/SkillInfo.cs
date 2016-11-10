@@ -14,6 +14,8 @@ namespace Tables
 
         public override string Id { get; set; }        public string Name { get; set; }
         public string Desc { get; set; }
+        public SKILL_ACT_TIMING ActTiming { get; set; }
+        public SKILL_ACT_TERM ActTerm { get; set; }
         public string Icon { get; set; }
         public SKILL_TARGET_TYPE Target { get; set; }
         public List<BuffInfoRecord> Buffs { get; set; }
@@ -33,6 +35,8 @@ namespace Tables
             recordStrList.Add(TableWriteBase.GetWriteStr(Id));
             recordStrList.Add(TableWriteBase.GetWriteStr(Name));
             recordStrList.Add(TableWriteBase.GetWriteStr(Desc));
+            recordStrList.Add(((int)ActTiming).ToString());
+            recordStrList.Add(((int)ActTerm).ToString());
             recordStrList.Add(TableWriteBase.GetWriteStr(Icon));
             recordStrList.Add(((int)Target).ToString());
             foreach (var testTableItem in Buffs)
@@ -111,24 +115,10 @@ namespace Tables
             {
                 pair.Value.Name = TableReadBase.ParseString(pair.Value.ValueStr[1]);
                 pair.Value.Desc = TableReadBase.ParseString(pair.Value.ValueStr[2]);
-                pair.Value.Icon = TableReadBase.ParseString(pair.Value.ValueStr[3]);
-                pair.Value.Target =  (SKILL_TARGET_TYPE)TableReadBase.ParseInt(pair.Value.ValueStr[4]);
-                if (!string.IsNullOrEmpty(pair.Value.ValueStr[5]))
-                {
-                    pair.Value.Buffs.Add( TableReader.BuffInfo.GetRecord(pair.Value.ValueStr[5]));
-                }
-                else
-                {
-                    pair.Value.Buffs.Add(null);
-                }
-                if (!string.IsNullOrEmpty(pair.Value.ValueStr[6]))
-                {
-                    pair.Value.Buffs.Add( TableReader.BuffInfo.GetRecord(pair.Value.ValueStr[6]));
-                }
-                else
-                {
-                    pair.Value.Buffs.Add(null);
-                }
+                pair.Value.ActTiming =  (SKILL_ACT_TIMING)TableReadBase.ParseInt(pair.Value.ValueStr[3]);
+                pair.Value.ActTerm =  (SKILL_ACT_TERM)TableReadBase.ParseInt(pair.Value.ValueStr[4]);
+                pair.Value.Icon = TableReadBase.ParseString(pair.Value.ValueStr[5]);
+                pair.Value.Target =  (SKILL_TARGET_TYPE)TableReadBase.ParseInt(pair.Value.ValueStr[6]);
                 if (!string.IsNullOrEmpty(pair.Value.ValueStr[7]))
                 {
                     pair.Value.Buffs.Add( TableReader.BuffInfo.GetRecord(pair.Value.ValueStr[7]));
@@ -148,6 +138,22 @@ namespace Tables
                 if (!string.IsNullOrEmpty(pair.Value.ValueStr[9]))
                 {
                     pair.Value.Buffs.Add( TableReader.BuffInfo.GetRecord(pair.Value.ValueStr[9]));
+                }
+                else
+                {
+                    pair.Value.Buffs.Add(null);
+                }
+                if (!string.IsNullOrEmpty(pair.Value.ValueStr[10]))
+                {
+                    pair.Value.Buffs.Add( TableReader.BuffInfo.GetRecord(pair.Value.ValueStr[10]));
+                }
+                else
+                {
+                    pair.Value.Buffs.Add(null);
+                }
+                if (!string.IsNullOrEmpty(pair.Value.ValueStr[11]))
+                {
+                    pair.Value.Buffs.Add( TableReader.BuffInfo.GetRecord(pair.Value.ValueStr[11]));
                 }
                 else
                 {

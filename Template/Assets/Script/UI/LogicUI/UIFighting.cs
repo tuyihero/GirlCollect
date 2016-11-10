@@ -32,16 +32,14 @@ namespace GameUI
 
         #region params
 
-        public UIFightGirlItem _SelfGirl;
-        public UIFightGirlItem _EnemyGirl;
-
-        public GameObject _GirlGroupPanel;
-        public UIContainerBase _GirlGroup;
+        public UIGirlMemberItem[] _SelfGirls;
+        public UIGirlMemberItem[] _EnemyGirls;
 
         public UIFightCustom _CustomInfo;
 
         public Animator _Animator;
 
+        private List<GirlMemberInfo> SelectedGirls = new List<GirlMemberInfo>();
         #endregion
 
         #region show funs
@@ -62,13 +60,34 @@ namespace GameUI
         {
             RefreshShow();
 
-            _SelfGirl._ClickEvent = ShowGirlGroup;
+            foreach (var girlItem in _SelfGirls)
+            {
+                girlItem._PanelClickEvent = BtnShowSelect;
+            }
         }
 
         public void RefreshShow()
         {
-            _SelfGirl.InitGirl(FightManager.Instance.SelfPlayer.FightingGirl);
-            _EnemyGirl.InitGirl(FightManager.Instance.EnemyPlayer.FightingGirl);
+            for (int i = 0; i < _SelfGirls.Length; ++i)
+            {
+                //if (FightManager.Instance.SelfPlayer.FightingGirls.Count > i)
+                //{
+                //    _SelfGirls[i].InitGirl(FightManager.Instance.SelfPlayer.FightingGirls[i]);
+                //}
+                //else
+                {
+                    _SelfGirls[i].InitGirl(null);
+                }
+
+                if (FightManager.Instance.EnemyPlayer.FightingGirls.Count > i)
+                {
+                    _EnemyGirls[i].InitGirl(FightManager.Instance.EnemyPlayer.FightingGirls[i]);
+                }
+                else
+                {
+                    _EnemyGirls[i].InitGirl(null);
+                }
+            }
 
             _CustomInfo.ShowCustom(FightManager.Instance.GetWaveGuest());
         }
@@ -76,42 +95,55 @@ namespace GameUI
 
         #region inact
 
-        public void ShowGirlGroup(object initObj)
+        public void BtnShowSelect(UIItemBase itemBase)
         {
-            //_GirlGroupPanel.SetActive(true);
-            //_GirlGroup.InitContentItem(FightManager.Instance.SelfPlayer.GetGroupGirls(), SelectGirl);
-            //ShowGirlGroupAnim();
+            UIGirlMemberItem selectItem = itemBase as UIGirlMemberItem;
+            SelectedGirls.Remove(selectItem._GirlMenberInfo);
+            RefreshGirlItems();
 
-            UIGirlSelectPanel.ShowAsyn(SelectGirl, null, null, true);
+            UIGirlSelectPanel.ShowAsyn(OnSelectMember, OnUnSelectMember, SelectedGirls, false);
         }
 
-        public void HideGirlGroup()
+        private void OnSelectMember(GirlMemberInfo girlInfo)
         {
-            //_GirlGroupPanel.SetActive(false);
-            HideGirlGroupAnim();
+            SelectedGirls.Add(girlInfo);
+            RefreshGirlItems();
+
+            if (SelectedGirls.Count == _SelfGirls.Length)
+            {
+                UIGirlSelectPanel.HideAsyn();
+            }
         }
 
-        public void SelectGirl(object girl)
+        private void OnUnSelectMember(GirlMemberInfo girlInfo)
         {
-            GirlMemberInfo girlInfo = (GirlMemberInfo)girl;
-            if (girl == null)
-                return;
+            SelectedGirls.Remove(girlInfo);
+            RefreshGirlItems();
+        }
 
-            FightManager.Instance.SelfPlayer.SetMemberGirl(girlInfo);
-
-            _SelfGirl.InitGirl(FightManager.Instance.SelfPlayer.FightingGirl);
-            SelfGirlSelectAnim(girl);
-            HideGirlGroup();
+        public void RefreshGirlItems()
+        {
+            for (int i = 0; i < _SelfGirls.Length; ++i)
+            {
+                if (SelectedGirls.Count > i)
+                    _SelfGirls[i].InitGirl(SelectedGirls[i]);
+                else
+                    _SelfGirls[i].InitGirl(null);
+            }
+            RefreshSkill();
         }
 
         public void RoundFight()
         {
+            FightManager.Instance.SelfPlayer.SetMemberGirl(SelectedGirls);
+
             _RoundResult = FightManager.Instance.RoundCalculate();
             if (_RoundResult == null)
                 return;
 
             StartRecultAnim();
 
+            SelectedGirls.Clear();
         }
 
         private void StartNextRound()
@@ -132,50 +164,31 @@ namespace GameUI
 
         #endregion
 
-        #region MoveAnim
+        #region skill
 
-        public float SHOW_GIRLGROUP_TIME = 0.5f;
-        public float GIRLGROUP_MOVE_DISTANCE = 100;
-
-        private void ShowGirlGroupAnim()
+        private void RefreshSkill()
         {
-            Vector3 moveToPos = _GirlGroupPanel.transform.localPosition + new Vector3(0, GIRLGROUP_MOVE_DISTANCE, 0);
-            Hashtable hash = new Hashtable();
-            hash.Add("position", moveToPos);
-            hash.Add("isLocal", true);
-            hash.Add("time", SHOW_GIRLGROUP_TIME);
-            iTween.MoveTo(_GirlGroupPanel, hash);
-        }
-
-        private void HideGirlGroupAnim()
-        {
-            Vector3 moveToPos = _GirlGroupPanel.transform.localPosition + new Vector3(0, -GIRLGROUP_MOVE_DISTANCE, 0);
-            Hashtable hash = new Hashtable();
-            hash.Add("position", moveToPos);
-            hash.Add("isLocal", true);
-            hash.Add("time", SHOW_GIRLGROUP_TIME);
-            iTween.MoveTo(_GirlGroupPanel, hash);
-        }
-
-        public float MOVE_SELECT_GIRL_TIME = 0.5f;
-        private Vector3 _SelfGirlOrgPos = Vector3.zero;
-        private void SelfGirlSelectAnim(object obj)
-        {
-            if (_SelfGirlOrgPos == Vector3.zero)
+            for (int i = 0; i < _SelfGirls.Length; ++i)
             {
-                _SelfGirlOrgPos = _SelfGirl.transform.position;
+                if (_SelfGirls[i]._GirlMenberInfo == null)
+                    continue;
+                for (int j = 0; j < _SelfGirls[i]._GirlMenberInfo.GirlInfoRecord.Skills.Count; ++j)
+                {
+                    if (_SelfGirls[i]._GirlMenberInfo.GirlInfoRecord.Skills[j] == null)
+                        continue;
+
+                    if (SkillManager.CanGirlSkillUse(_SelfGirls[i]._GirlMenberInfo, _SelfGirls[i]._GirlMenberInfo.GirlInfoRecord.Skills[j], SelectedGirls))
+                    {
+                        _SelfGirls[i].SetSkillCanUse(j, true);
+                    }
+                    else
+                    {
+                        _SelfGirls[i].SetSkillCanUse(j, false);
+                    }
+
+                }
+                
             }
-
-            var moveFromPos = _GirlGroup.GetObjItemPos(obj);
-            if (moveFromPos == Vector3.zero)
-                return;
-
-            _SelfGirl.transform.position = moveFromPos;
-            Hashtable hash = new Hashtable();
-            hash.Add("position", _SelfGirlOrgPos);
-            hash.Add("isLocal", false);
-            hash.Add("time", MOVE_SELECT_GIRL_TIME);
-            iTween.MoveTo(_SelfGirl.gameObject, hash);
         }
 
         #endregion

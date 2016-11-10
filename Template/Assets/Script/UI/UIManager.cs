@@ -88,6 +88,7 @@ namespace GameUI
             if (_UIObjs.ContainsKey(uiPath))
             {
                 _UIObjs[uiPath].Show(hashtable);
+                _UIObjs[uiPath].transform.SetAsLastSibling();
             }
             else
             {

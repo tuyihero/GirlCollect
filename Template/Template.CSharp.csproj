@@ -126,9 +126,6 @@
     <Compile Include="Assets\Script\Logic\Fight\FightObjs\_FightObjBase.cs" />
     <Compile Include="Assets\Script\Logic\Fight\Skill\BuffImpact_Base.cs" />
     <Compile Include="Assets\Script\Logic\Fight\Skill\BuffManager.cs" />
-    <Compile Include="Assets\Script\Logic\Fight\Skill\Impacts\BuffImpact_ModifyAttract.cs" />
-    <Compile Include="Assets\Script\Logic\Fight\Skill\Impacts\BuffImpact_ModifyValueInstant.cs" />
-    <Compile Include="Assets\Script\Logic\Fight\Skill\Impacts\BuffImpact_ModifyValueLast.cs" />
     <Compile Include="Assets\Script\Logic\Fight\Skill\SkillManager.cs" />
     <Compile Include="Assets\Script\Logic\ItemInfo\ItemInfo.cs" />
     <Compile Include="Assets\Script\Logic\ItemInfo\ItemPack.cs" />
@@ -199,10 +196,6 @@
     <Compile Include="Assets\Tables\Code\TableReader\KBCsv\Internal\CsvParser.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\KBCsv\Internal\ReadOnlyDictionary.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\KBCsv\RecordBase.cs" />
-    <Compile Include="Assets\Tables\Code\TableReader\TableBase\BuffImpact_ModifyAttract.cs" />
-    <Compile Include="Assets\Tables\Code\TableReader\TableBase\BuffImpact_ModifyPoint.cs" />
-    <Compile Include="Assets\Tables\Code\TableReader\TableBase\BuffImpact_ModifyValueInstant.cs" />
-    <Compile Include="Assets\Tables\Code\TableReader\TableBase\BuffImpact_ModifyValueLast.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\BuffInfo.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\DropGroup.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\DropItem.cs" />
@@ -220,6 +213,8 @@
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\GirlLevelInfo.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\GlobalDefine.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\GuestInfo.cs" />
+    <Compile Include="Assets\Tables\Code\TableReader\TableBase\Impact_AttrChange.cs" />
+    <Compile Include="Assets\Tables\Code\TableReader\TableBase\Impact_ModifyCul.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\ItemInfo.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\ItemType_AddDiamond.cs" />
     <Compile Include="Assets\Tables\Code\TableReader\TableBase\ItemType_AddGold.cs" />
@@ -257,11 +252,14 @@
     <None Include="Assets\Tables\Construct\EnumInfo\CURRENCY_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\DROP_GROUP_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\DROP_ITEM_TYPE.xml" />
+    <None Include="Assets\Tables\Construct\EnumInfo\IMPACT_MODIFY_TARGET.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\IMPACT_MODIFY_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\ITEM_QUALITY.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\ITEM_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\MISSION_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\PLAYER_VALUE_TYPE.xml" />
+    <None Include="Assets\Tables\Construct\EnumInfo\SKILL_ACT_TERM.xml" />
+    <None Include="Assets\Tables\Construct\EnumInfo\SKILL_ACT_TIMING.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\SKILL_TARGET_TYPE.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\BaseFunc\DropGroup.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\BaseFunc\DropItem.xml" />
@@ -285,10 +283,8 @@
     <None Include="Assets\Tables\Construct\TableConstruct\BaseFunc\ShopItem.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\BaseFunc\ShopTable.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\BaseFunc\ShowInfo.xml" />
-    <None Include="Assets\Tables\Construct\TableConstruct\BuffImpact\BuffImpact_ModifyAttract.xml" />
-    <None Include="Assets\Tables\Construct\TableConstruct\BuffImpact\BuffImpact_ModifyPoint.xml" />
-    <None Include="Assets\Tables\Construct\TableConstruct\BuffImpact\BuffImpact_ModifyValueInstant.xml" />
-    <None Include="Assets\Tables\Construct\TableConstruct\BuffImpact\BuffImpact_ModifyValueLast.xml" />
+    <None Include="Assets\Tables\Construct\TableConstruct\BuffImpact\Impact_AttrChange.xml" />
+    <None Include="Assets\Tables\Construct\TableConstruct\BuffImpact\Impact_ModifyCul.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\BuffInfo.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\EquipInfo.xml" />
     <None Include="Assets\Tables\Construct\TableConstruct\FightInfo.xml" />

@@ -53,10 +53,8 @@
     <constructCode>Impact</constructCode>
     <constructType1>表格索引</constructType1>
     <constructType2>
-      <constructType2>BuffImpact_ModifyValueInstant</constructType2>
-      <constructType2>BuffImpact_ModifyValueLast</constructType2>
-      <constructType2>BuffImpact_ModifyAttract</constructType2>
-      <constructType2>BuffImpact_ModifyPoint</constructType2>
+      <constructType2>Impact_ModifyCul</constructType2>
+      <constructType2>Impact_AttrChange</constructType2>
     </constructType2>
     <constructDefault>
     </constructDefault>

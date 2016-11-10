@@ -181,22 +181,22 @@ namespace GameLogic
             "Classic",
         };
 
-        private int _Attr1A = 0;
+        protected int _Attr1A = 0;
         public int Attr1A { get { return _Attr1A; } }
 
-        private int _Attr1B = 0;
+        protected int _Attr1B = 0;
         public int Attr1B { get { return _Attr1B; } }
 
-        private int _Attr2A = 0;
+        protected int _Attr2A = 0;
         public int Attr2A { get { return _Attr2A; } }
 
-        private int _Attr2B = 0;
+        protected int _Attr2B = 0;
         public int Attr2B { get { return _Attr2B; } }
 
-        private int _Attr3A = 0;
+        protected int _Attr3A = 0;
         public int Attr3A { get { return _Attr3A; } }
 
-        private int _Attr3B = 0;
+        protected int _Attr3B = 0;
         public int Attr3B { get { return _Attr3B; } }
 
         public void CalculateAttr()

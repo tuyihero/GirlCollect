@@ -123,6 +123,13 @@ namespace GameUI
             UIErrorTips.ShowAsyn("Error:" + clickCount.ToString());
         }
 
+        public void BtnAddRes()
+        {
+            PlayerData.Instance.AddCurrency(Tables.CURRENCY_TYPE.DIAMOND, 50);
+            PlayerData.Instance.AddCurrency(Tables.CURRENCY_TYPE.LUXURY, 500);
+            PlayerData.Instance.AddCurrency(Tables.CURRENCY_TYPE.GOLD, 5000);
+        }
+
         #endregion
     }
 }

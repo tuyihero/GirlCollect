@@ -15,7 +15,7 @@ namespace GameLogic
             return null;
         }
 
-        public virtual FightGirlInfo GetEnemyGirl()
+        public virtual List<GirlMemberInfo> GetEnemyGirl()
         {
             return null;
         }

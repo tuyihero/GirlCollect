@@ -21,14 +21,15 @@ namespace GameUI
         public Text[] _AttrValue;
         public GameObject[] Skills;
         public Text[] _SkillNames;
+        public Text Star;
 
         public GameObject _MaskGO;
         
-        public FightGirlInfo _GirlMenberInfo;
+        public GirlMemberInfo _GirlMenberInfo;
         
         #endregion
 
-        public virtual void InitGirl(FightGirlInfo info)
+        public virtual void InitGirl(GirlMemberInfo info)
         {
             if (info == null)
             {
@@ -40,7 +41,12 @@ namespace GameUI
                 {
                     _AttrText[i].gameObject.SetActive(false);
                 }
-                _MaskGO.SetActive(false);
+                for (int i = 0; i < _SkillNames.Length; ++i)
+                {
+                    Skills[i].SetActive(false);
+                }
+                Star.text = "";
+                //_MaskGO.SetActive(false);
                 return;
             }
 
@@ -53,15 +59,32 @@ namespace GameUI
 
             if (_GirlMemberName != null)
             {
-                _GirlMemberName.text = _GirlMenberInfo._GirlInfo.GirlInfoRecord.Name;
+                _GirlMemberName.text = _GirlMenberInfo.GirlInfoRecord.Name;
             }
 
             if (_GirlMemberDesc != null)
             {
-                _GirlMemberDesc.text = _GirlMenberInfo._GirlInfo.GirlInfoRecord.Desc;
+                _GirlMemberDesc.text = _GirlMenberInfo.GirlInfoRecord.Desc;
             }
 
-            var attrDic = _GirlMenberInfo._GirlInfo.GetAdvantageAttrs();
+            Star.text = _GirlMenberInfo.GirlInfoRecord.Star.ToString();
+
+            for (int i = 0; i < _SkillNames.Length; ++i)
+            {
+                if (_GirlMenberInfo.GirlInfoRecord.Skills.Count <= i
+                    || _GirlMenberInfo.GirlInfoRecord.Skills[i] == null)
+                {
+                    Skills[i].SetActive(false);
+                }
+                else
+                {
+                    Skills[i].SetActive(true);
+                    _SkillNames[i].text = _GirlMenberInfo.GirlInfoRecord.Skills[i].Name;
+                }
+
+            }
+
+            var attrDic = _GirlMenberInfo.GetAdvantageAttrs();
             int idx = 0;
             foreach (var attr in attrDic)
             {
@@ -76,14 +99,14 @@ namespace GameUI
                 _AttrText[i].gameObject.SetActive(false);
             }
 
-            if (_GirlMenberInfo._HasMask)
-            {
-                _MaskGO.SetActive(true);
-            }
-            else
-            {
-                _MaskGO.SetActive(false);
-            }
+            //if (_GirlMenberInfo._HasMask)
+            //{
+            //    _MaskGO.SetActive(true);
+            //}
+            //else
+            //{
+            //    _MaskGO.SetActive(false);
+            //}
         }
 
         public void ShowWithOutMask()
@@ -94,6 +117,14 @@ namespace GameUI
         public void ShowIsLock()
         {
             
+        }
+
+        public void SetSkillCanUse(int idx, bool isCan)
+        {
+            if(isCan)
+                _SkillNames[idx].color = new Color(0, 1, 0);
+            else
+                _SkillNames[idx].color = new Color(0, 0, 0);
         }
     }
 }
