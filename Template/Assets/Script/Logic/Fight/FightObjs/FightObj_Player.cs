@@ -99,42 +99,20 @@ namespace GameLogic
         public int[] CalculateAttractValue(GuestInfoRecord guestInfo)
         {
             int attractValue = 0;
-            int[] attractBase = new int[FightManager.ROUND_CALCULATE_COUNT];
+            int[] attractBase = new int[MAX_FIGHT_GIRL_COUNT + 1];
 
-            foreach (var fightingGirl in _FightingGirls)
+            for(int i = 0; i< MAX_FIGHT_GIRL_COUNT; ++i)
             {
-                attractValue = (int)(guestInfo.Attr1AAttract * fightingGirl.Attr1A);
-                if (attractValue > 0)
+                if (_FightingGirls.Count > i)
                 {
-                    attractBase[0] = (int)(attractValue * fightingGirl.GetMoodRate());
+                    attractValue += (int)(guestInfo.Attr1AAttract * _FightingGirls[i].Attr1A);
+                    attractValue += (int)(guestInfo.Attr1BAttract * _FightingGirls[i].Attr1B);
+                    attractValue += (int)(guestInfo.Attr2AAttract * _FightingGirls[i].Attr2A);
+                    attractValue += (int)(guestInfo.Attr2BAttract * _FightingGirls[i].Attr2B);
+                    attractValue += (int)(guestInfo.Attr3AAttract * _FightingGirls[i].Attr3A);
+                    attractValue += (int)(guestInfo.Attr3BAttract * _FightingGirls[i].Attr3B);
                 }
-                attractValue = (int)(guestInfo.Attr1BAttract * fightingGirl.Attr1B);
-                if (attractValue > 0)
-                {
-                    attractBase[0] = (int)(attractValue * fightingGirl.GetMoodRate());
-                }
-
-                attractValue = (int)(guestInfo.Attr2AAttract * fightingGirl.Attr2A);
-                if (attractValue > 0)
-                {
-                    attractBase[1] = (int)(attractValue * fightingGirl.GetMoodRate());
-                }
-                attractValue = (int)(guestInfo.Attr2BAttract * fightingGirl.Attr2B);
-                if (attractValue > 0)
-                {
-                    attractBase[1] = (int)(attractValue * fightingGirl.GetMoodRate());
-                }
-
-                attractValue = (int)(guestInfo.Attr3AAttract * fightingGirl.Attr3A);
-                if (attractValue > 0)
-                {
-                    attractBase[2] = (int)(attractValue * fightingGirl.GetMoodRate());
-                }
-                attractValue = (int)(guestInfo.Attr3BAttract * fightingGirl.Attr3B);
-                if (attractValue > 0)
-                {
-                    attractBase[2] = (int)(attractValue * fightingGirl.GetMoodRate());
-                }
+                attractBase[i] = attractValue;
             }
 
             for (int i = 0; i < 3; ++i)
@@ -149,42 +127,20 @@ namespace GameLogic
         {
             int pointValue = 0;
 
-            int[] pointBase = new int[FightManager.ROUND_CALCULATE_COUNT];
+            int[] pointBase = new int[FightManager.ROUND_CALCULATE_COUNT + 1];
 
-            foreach (var fightingGirl in _FightingGirls)
+            for (int i = 0; i < MAX_FIGHT_GIRL_COUNT; ++i)
             {
-                pointValue = (int)(guestInfo.Attr1APoint * fightingGirl.Attr1A * guestCount);
-                if (pointValue > 0)
+                if (_FightingGirls.Count > i)
                 {
-                    pointBase[0] = (int)(pointValue * fightingGirl.GetMoodRate());
+                    pointValue += (int)(guestInfo.Attr1APoint * _FightingGirls[i].Attr1A);
+                    pointValue += (int)(guestInfo.Attr1BPoint * _FightingGirls[i].Attr1B);
+                    pointValue += (int)(guestInfo.Attr2APoint * _FightingGirls[i].Attr2A);
+                    pointValue += (int)(guestInfo.Attr2BPoint * _FightingGirls[i].Attr2B);
+                    pointValue += (int)(guestInfo.Attr3APoint * _FightingGirls[i].Attr3A);
+                    pointValue += (int)(guestInfo.Attr3BPoint * _FightingGirls[i].Attr3B);
                 }
-                pointValue = (int)(guestInfo.Attr1BAttract * fightingGirl.Attr1B * guestCount);
-                if (pointValue > 0)
-                {
-                    pointBase[0] = (int)(pointValue * fightingGirl.GetMoodRate());
-                }
-
-                pointValue = (int)(guestInfo.Attr2APoint * fightingGirl.Attr2A * guestCount);
-                if (pointValue > 0)
-                {
-                    pointBase[1] = (int)(pointValue * fightingGirl.GetMoodRate());
-                }
-                pointValue = (int)(guestInfo.Attr2BAttract * fightingGirl.Attr2B * guestCount);
-                if (pointValue > 0)
-                {
-                    pointBase[1] = (int)(pointValue * fightingGirl.GetMoodRate());
-                }
-
-                pointValue = (int)(guestInfo.Attr3APoint * fightingGirl.Attr3A * guestCount);
-                if (pointValue > 0)
-                {
-                    pointBase[2] = (int)(pointValue * fightingGirl.GetMoodRate());
-                }
-                pointValue = (int)(guestInfo.Attr3BAttract * fightingGirl.Attr3B * guestCount);
-                if (pointValue > 0)
-                {
-                    pointBase[2] = (int)(pointValue * fightingGirl.GetMoodRate());
-                }
+                pointBase[i] = pointValue;
             }
             for (int i = 0; i < 3; ++i)
             {

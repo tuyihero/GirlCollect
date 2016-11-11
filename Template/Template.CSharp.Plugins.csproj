@@ -72,6 +72,7 @@
     <None Include="Assets\Editor\Logic\Table\ScriptTemplate\FightStageCheck_Template.txt" />
     <None Include="Assets\Editor\Test\RandomGirlInfo.txt" />
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
+    <None Include="Assets\Resources\Tables\nameTemp.txt" />
     <None Include="Assets\Tables\Construct\EnumInfo\CURRENCY_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\DROP_GROUP_TYPE.xml" />
     <None Include="Assets\Tables\Construct\EnumInfo\DROP_ITEM_TYPE.xml" />

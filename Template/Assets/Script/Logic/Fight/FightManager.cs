@@ -187,6 +187,7 @@ namespace GameLogic
         #region round
 
         public const int ROUND_CALCULATE_COUNT = 4;
+        public const int FIGHT_GIRL_COUNT = 3;
 
         public enum SkillAnimType
         {
