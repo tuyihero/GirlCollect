@@ -78,5 +78,24 @@ namespace GameBase
 
             return levelRates.Length - 1;
         }
+
+        public static int GetRandomExclude(List<int> include, List<int> exclude)
+        {
+            List<int> randomRange = new List<int>();
+            foreach (var randomValue in include)
+            {
+                if (!exclude.Contains(randomValue))
+                {
+                    randomRange.Add(randomValue);
+                }
+            }
+
+            int randomIdx = Random.Range(0, randomRange.Count);
+            if (randomIdx >= randomRange.Count)
+            {
+                return -1;
+            }
+            return randomRange[randomIdx];
+        }
     }
 }

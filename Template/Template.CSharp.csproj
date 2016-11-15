@@ -126,6 +126,7 @@
     <Compile Include="Assets\Script\Logic\Fight\FightObjs\_FightObjBase.cs" />
     <Compile Include="Assets\Script\Logic\Fight\Skill\BuffImpact_Base.cs" />
     <Compile Include="Assets\Script\Logic\Fight\Skill\BuffManager.cs" />
+    <Compile Include="Assets\Script\Logic\Fight\Skill\Impacts\Impact_ModifyCul.cs" />
     <Compile Include="Assets\Script\Logic\Fight\Skill\SkillManager.cs" />
     <Compile Include="Assets\Script\Logic\ItemInfo\ItemInfo.cs" />
     <Compile Include="Assets\Script\Logic\ItemInfo\ItemPack.cs" />

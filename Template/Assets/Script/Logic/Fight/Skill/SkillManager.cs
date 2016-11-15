@@ -236,5 +236,19 @@ namespace GameLogic
         }
 
         #endregion
+
+        #region ex calculate
+
+        public void Calculate(GirlMemberInfo girl, GuestInfoRecord guest, SkillInfoRecord skill, int orgAttract, int orgPoint, out int outAttract, out int outPoint)
+        {
+            outAttract = orgAttract;
+            outPoint = orgPoint;
+            //foreach (var buff in skill.Buffs)
+            {
+                _BuffManager.Calculate(girl, guest, skill.Buffs[0], orgAttract, orgPoint, out outAttract, out outPoint);
+            }
+        }
+
+        #endregion
     }
 }

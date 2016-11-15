@@ -294,17 +294,11 @@ namespace GameLogic
         {
             var guest = GetWaveGuest();
 
-            int[] selfAttractValues = SelfPlayer.CalculateAttractValue(guest);
-            int[] enemyAttractValues = EnemyPlayer.CalculateAttractValue(guest);
+            SelfPlayer.CalculateAttractValue(guest, out roundResult.SelfAttractBase, out roundResult.SelfAttractFinal);
+            EnemyPlayer.CalculateAttractValue(guest, out roundResult.EnemyAttractBase, out roundResult.EnemyAttractFinal);
 
-            roundResult.SelfAttractBase = selfAttractValues;
-            roundResult.EnemyAttractBase = enemyAttractValues;
-            roundResult.SelfAttractFinal = new int[ROUND_CALCULATE_COUNT];
-            roundResult.EnemyAttractFinal = new int[ROUND_CALCULATE_COUNT];
             for (int i = 0; i < ROUND_CALCULATE_COUNT; ++i)
             {
-                roundResult.SelfAttractFinal[i] = roundResult.SelfAttractBase[i];
-                roundResult.EnemyAttractFinal[i] = roundResult.EnemyAttractBase[i];
                 roundResult.SelfAttractBaseTotal += roundResult.SelfAttractBase[i];
                 roundResult.EnemyAttractBaseTotal += roundResult.EnemyAttractFinal[i];
             }
@@ -357,19 +351,16 @@ namespace GameLogic
             var guest = GetWaveGuest();
             var enemyGirl = GetWaveEnemy();
 
-            roundResult.SelfPointBase = SelfPlayer.CalculatePointValue(guest, roundResult.SelfAttractNum);
-            roundResult.EnemyPointBase = EnemyPlayer.CalculatePointValue(guest, roundResult.EnemyAttractNum);
-            roundResult.SelfPointFinal = new int[ROUND_CALCULATE_COUNT];
-            roundResult.EnemyPointFinal = new int[ROUND_CALCULATE_COUNT];
+            SelfPlayer.CalculatePointValue(guest, roundResult.SelfAttractNum, out roundResult.SelfPointBase, out roundResult.SelfPointFinal);
+            EnemyPlayer.CalculatePointValue(guest, roundResult.EnemyAttractNum, out roundResult.EnemyPointBase, out roundResult.EnemyPointFinal);
+            
             for (int i = 0; i < ROUND_CALCULATE_COUNT; ++i)
             {
-                roundResult.SelfPointFinal[i] = roundResult.SelfPointBase[i];
-                roundResult.EnemyPointFinal[i] = roundResult.EnemyPointBase[i];
                 roundResult.SelfPointBaseTotal += roundResult.SelfPointBase[i];
                 roundResult.EnemyPointBaseTotal += roundResult.EnemyPointFinal[i];
             }
 
-            RoundAttract(ref roundResult);
+            RoundPoint(ref roundResult);
 
             int selfPointValue = 0;
             foreach (var finalValue in roundResult.SelfPointFinal)

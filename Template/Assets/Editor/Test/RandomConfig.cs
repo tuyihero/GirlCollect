@@ -24,72 +24,64 @@ public class RandomConfig
         string randomConfigPath = Application.dataPath + "/Editor/Test/RandomGirlInfo.txt";
         StreamWriter streamWriter = new StreamWriter(randomConfigPath);
 
-        foreach (var girl in Tables.TableReader.GirlInfo.Records)
+        for(int i = 0; i < 100; ++i)
         {
-            streamWriter.WriteLine(GetAttrStr(girl.Value));
+            streamWriter.Write(GetAttrStr());
         }
 
         streamWriter.Close();
     }
 
-    public static string GetAttrStr(Tables.GirlInfoRecord girlInfo)
+    public static string GetAttrStr()
     {
-        List<int> starAttrs = null;
-        switch (girlInfo.Star)
-        {
-            case 1:
-                starAttrs = GameBase.GameRandom.GetTotalRange(30, 5, 3);
-                break;
-            case 2:
-                starAttrs = GameBase.GameRandom.GetTotalRange(40, 7, 3);
-                break;
-            case 3:
-                starAttrs = GameBase.GameRandom.GetTotalRange(50, 9, 3);
-                break;
-            case 4:
-                starAttrs = GameBase.GameRandom.GetTotalRange(60, 10, 3);
-                break;
-            case 5:
-                starAttrs = GameBase.GameRandom.GetTotalRange(70, 12, 3);
-                break;
-        }
+        List<int> include1 = new List<int>() {1,2,3,4 };
+        List<int> include2 = new List<int>() {5,6,7,8 };
+        List<int> include3 = new List<int>() {1,2,5,6 };
+        List<int> include4 = new List<int>() { 3,4,7,8};
+        List<int> include5 = new List<int>() { 1,3,5,7};
+        List<int> include6 = new List<int>() { 2,4,6,8};
+        List<int> include7 = new List<int>() { 1,2,3,4,5,6,7,8};
+        List<int> include8 = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-        List<int> attrValues = new List<int>();
+        List<List<int>> includeList = new List<List<int>>() { include1 , include2 , include3 , include4 ,
+            include5 , include6, include7 , include8 }; 
 
-        if (girlInfo.Attr1A > 0)
-            attrValues.Add(starAttrs[0]);
-        else
-            attrValues.Add(0);
-
-        if (girlInfo.Attr1B > 0)
-            attrValues.Add(starAttrs[0]);
-        else
-            attrValues.Add(0);
-
-        if (girlInfo.Attr2A > 0)
-            attrValues.Add(starAttrs[1]);
-        else
-            attrValues.Add(0);
-
-        if (girlInfo.Attr2B > 0)
-            attrValues.Add(starAttrs[1]);
-        else
-            attrValues.Add(0);
-
-        if (girlInfo.Attr3A > 0)
-            attrValues.Add(starAttrs[2]);
-        else
-            attrValues.Add(0);
-
-        if (girlInfo.Attr3B > 0)
-            attrValues.Add(starAttrs[2]);
-        else
-            attrValues.Add(0);
+        List<int> exclude = new List<int>();
 
         string attrStr = "";
-        foreach (var attrValue in attrValues)
+        for (int i = 0; i < 8; ++i)
         {
-            attrStr += attrValue.ToString() + "\t";
+            int select = GameBase.GameRandom.GetRandomExclude(includeList[i], exclude);
+            if (select < 0)
+                return "";
+            exclude.Add(select);
+            switch (select)
+            {
+                case 1:
+                    attrStr += "10	0	10	0	10	0\n";
+                    break;
+                case 2:
+                    attrStr += "10	0	10	0	0	10\n";
+                    break;
+                case 3:
+                    attrStr += "10	0	0	10	10	0\n";
+                    break;
+                case 4:
+                    attrStr += "10	0	0	10	0	10\n";
+                    break;
+                case 5:
+                    attrStr += "0	10	10	0	10	0\n";
+                    break;
+                case 6:
+                    attrStr += "0	10	10	0	0	10\n";
+                    break;
+                case 7:
+                    attrStr += "0	10	0	10	10	0\n";
+                    break;
+                case 8:
+                    attrStr += "0	10	0	10	0	10\n";
+                    break;
+            }
         }
 
         return attrStr;

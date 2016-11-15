@@ -96,12 +96,13 @@ namespace GameLogic
 
         #region cal result
 
-        public int[] CalculateAttractValue(GuestInfoRecord guestInfo)
+        public int[] CalculateAttractValue(GuestInfoRecord guestInfo, out int[] attractBase, out int[] attractFinal)
         {
             int attractValue = 0;
-            int[] attractBase = new int[MAX_FIGHT_GIRL_COUNT + 1];
+            attractBase = new int[MAX_FIGHT_GIRL_COUNT + 1];
+            attractFinal = new int[MAX_FIGHT_GIRL_COUNT + 1];
 
-            for(int i = 0; i< MAX_FIGHT_GIRL_COUNT; ++i)
+            for (int i = 0; i< MAX_FIGHT_GIRL_COUNT; ++i)
             {
                 if (_FightingGirls.Count > i)
                 {
@@ -113,21 +114,33 @@ namespace GameLogic
                     attractValue += (int)(guestInfo.Attr3BAttract * _FightingGirls[i].Attr3B);
                 }
                 attractBase[i] = attractValue;
+                attractFinal[i] = attractValue;
+
+                if (SkillManager.CanGirlSkillUse(_FightingGirls[i], _FightingGirls[i].GirlInfoRecord.Skills[0], _FightingGirls))
+                {
+                    int exAttract = 0;
+                    int exPoint = 0;
+                    _SkillManager.Calculate(_FightingGirls[i], guestInfo, _FightingGirls[i].GirlInfoRecord.Skills[0], attractValue, 0, out exAttract, out exPoint);
+                    attractFinal[i] = exAttract;
+                }
+                
             }
 
             for (int i = 0; i < 3; ++i)
             {
                 attractBase[3] += attractBase[i];
+                attractFinal[3] += attractFinal[i];
             }
 
             return attractBase;
         }
 
-        public int[] CalculatePointValue(GuestInfoRecord guestInfo, int guestCount)
+        public int[] CalculatePointValue(GuestInfoRecord guestInfo, int guestCount, out int[] pointBase, out int[] pointFinal)
         {
             int pointValue = 0;
 
-            int[] pointBase = new int[FightManager.ROUND_CALCULATE_COUNT + 1];
+            pointBase = new int[FightManager.ROUND_CALCULATE_COUNT + 1];
+            pointFinal = new int[FightManager.ROUND_CALCULATE_COUNT + 1];
 
             for (int i = 0; i < MAX_FIGHT_GIRL_COUNT; ++i)
             {
@@ -141,10 +154,20 @@ namespace GameLogic
                     pointValue += (int)(guestInfo.Attr3BPoint * _FightingGirls[i].Attr3B);
                 }
                 pointBase[i] = pointValue;
+                pointFinal[i] = pointValue;
+
+                if (SkillManager.CanGirlSkillUse(_FightingGirls[i], _FightingGirls[i].GirlInfoRecord.Skills[0], _FightingGirls))
+                {
+                    int exAttract = 0;
+                    int exPoint = 0;
+                    _SkillManager.Calculate(_FightingGirls[i], guestInfo, _FightingGirls[i].GirlInfoRecord.Skills[0], 0, pointValue, out exAttract, out exPoint);
+                    pointFinal[i] = exPoint;
+                }
             }
             for (int i = 0; i < 3; ++i)
             {
                 pointBase[3] += pointBase[i];
+                pointFinal[3] += pointFinal[i];
             }
 
             return pointBase;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using Tables;
 namespace GameLogic
 {
     public class BuffManager
@@ -62,6 +63,16 @@ namespace GameLogic
 
         public void RoundPoint(ref FightManager.RoundResult roundResult)
         { }
+
+        #endregion
+
+        #region ex calculate
+
+        public void Calculate(GirlMemberInfo girl, GuestInfoRecord guest, BuffInfoRecord buffRecord, int orgAttract, int orgPoint, out int outAttract, out int outPoint)
+        {
+            var buffBase = (BuffImpact_Base)System.Activator.CreateInstance(System.Type.GetType("GameLogic." + buffRecord.Impact.TableName));
+            buffBase.Calculate(girl, guest, buffRecord, orgAttract, orgPoint, out outAttract,  out outPoint);
+        }
 
         #endregion
     }

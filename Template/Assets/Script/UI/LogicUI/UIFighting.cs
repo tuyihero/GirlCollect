@@ -212,11 +212,13 @@ namespace GameUI
         public float RESULT_MOVE_DISTANCE = 400;
         public float RESULT_MOVE_SPEED = 700;
         public float RESULT_NUM_ACT1_TIME = 0.5f;
+        public float RESULT_NUM_ACT2_TIME = 0.5f;
         public float RESULT_NUM_ACT_TOTAL_TIME = 0.1f;
         public float RESULT_NUM_ACT_GUEST_TIME = 0.1f;
         public float RESULT_ATTRACT_END_WAIT_TIME = 0.3f;
 
         private float _ResultNumAct1StartTime = 0;
+        private float _ResultNumAct2StartTime = 0;
         private float _ResultNumTotalStartTime = 0;
         private float _ResultNumGuestStartTime = 0;
         private float _ResultAttractEndWaitTime = 0;
@@ -385,7 +387,28 @@ namespace GameUI
 
         private void ShowAttractNumAnim2()
         {
-            _ResultAnimStage = ResultAnimStage.AttractNumTotal;
+            if (_ResultNumAct2StartTime == 0)
+            {
+                _ResultNumAct2StartTime = RESULT_NUM_ACT2_TIME;
+                for (int i = 0; i < _SelfPointTx.Length; ++i)
+                {
+                    string valueStr = _RoundResult.SelfAttractBase[i].ToString() + "+<color=#00ff00ff>" + (_RoundResult.SelfAttractFinal[i] - _RoundResult.SelfAttractBase[i]).ToString() + "</color>";
+                    _SelfPointTx[i].text = valueStr;
+                    valueStr = _RoundResult.EnemyAttractBase[i].ToString() + "+<color=#00ff00ff>" + (_RoundResult.EnemyAttractFinal[i] - _RoundResult.EnemyAttractBase[i]).ToString() + "</color>";
+                    _EnemyPointTx[i].text = valueStr;
+                }
+            }
+            else
+            {
+                _ResultNumAct2StartTime -= Time.deltaTime;
+                if (_ResultNumAct2StartTime <= 0)
+                {
+                    _ResultNumAct2StartTime = 0;
+
+                    _ResultAnimStage = ResultAnimStage.AttractNumTotal;
+
+                }
+            }
         }
 
         private void ShowAttractNumTotal()
@@ -515,7 +538,29 @@ namespace GameUI
 
         private void ShowPointNumAnim2()
         {
-            _ResultAnimStage = ResultAnimStage.PointNumTotal;
+            if (_ResultNumAct2StartTime == 0)
+            {
+                _ResultNumAct2StartTime = RESULT_NUM_ACT2_TIME;
+                for (int i = 0; i < _SelfPointTx.Length; ++i)
+                {
+                    string valueStr = _RoundResult.SelfPointBase[i].ToString() + "+<color=#00ff00ff>" + (_RoundResult.SelfPointFinal[i] - _RoundResult.SelfPointBase[i]).ToString() + "</color>";
+                    _SelfPointTx[i].text = valueStr;
+                    valueStr = _RoundResult.EnemyPointBase[i].ToString() + "+<color=#00ff00ff>" + (_RoundResult.EnemyPointFinal[i] - _RoundResult.EnemyPointBase[i]).ToString() + "</color>";
+                    _EnemyPointTx[i].text = valueStr;
+                }
+            }
+            else
+            {
+                _ResultNumAct2StartTime -= Time.deltaTime;
+                if (_ResultNumAct2StartTime <= 0)
+                {
+                    _ResultNumAct2StartTime = 0;
+
+                    _ResultAnimStage = ResultAnimStage.PointNumTotal;
+
+                }
+            }
+            
         }
 
         private void ShowPointNumTotal()
